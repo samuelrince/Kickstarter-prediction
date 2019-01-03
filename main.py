@@ -44,8 +44,9 @@ for cur in data['currency']:
         index += 1
 # Country
 country, index = dict(), 0
-for cur in data['country']:
-    if cur not in country:
-        country[cur] = index
+for ctr in data['country']:
+    if ctr not in country:
+        country[ctr] = index
         index += 1
 
+# ===== Update data values =====
