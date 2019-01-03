@@ -15,7 +15,7 @@ features = ['category', 'main_category', 'currency', 'deadline', 'launched', 'co
             'usd pledged', 'usd_goal_real']
 X_train = pd.DataFrame(data=train_set[features])
 X_test = pd.DataFrame(data=test_set[features])
-# # Labels
+# Labels
 y_train = pd.DataFrame(data=train_set['state'])
 y_test = pd.DataFrame(data=test_set['state'])
 
@@ -63,3 +63,13 @@ X_test['currency'].replace(currency, inplace=True)
 X_train['country'].replace(country, inplace=True)
 X_test['country'].replace(country, inplace=True)
 
+# ===== Duration calculation =====
+# Convert data to datetime format
+X_train['deadline'] = pd.to_datetime(X_train['deadline'], format='%Y-%m-%d')
+X_test['deadline'] = pd.to_datetime(X_test['deadline'], format='%Y-%m-%d')
+X_train['launched'] = pd.to_datetime(X_train['launched'], format='%Y-%m-%d %H:%M:%S')
+X_test['launched'] = pd.to_datetime(X_test['launched'], format='%Y-%m-%d %H:%M:%S')
+# Adding duration time to the data
+X_train['duration'] = (X_train['deadline']-X_train['launched']).astype('timedelta64[D]')
+# Delete 'launched' and 'deadline' columns
+X_train.drop(columns=['deadline', 'launched'], inplace=True)
