@@ -13,11 +13,11 @@ test_set = data.tail(data.__len__() - length_training_set)
 # Feature selection
 features = ['category', 'main_category', 'currency', 'deadline', 'launched', 'country',
             'usd pledged', 'usd_goal_real']
-X_train = train_set[features]
-X_test = test_set[features]
-# Labels
-y_train = train_set['state']
-y_test = test_set['state']
+X_train = pd.DataFrame(data=train_set[features])
+X_test = pd.DataFrame(data=test_set[features])
+# # Labels
+y_train = pd.DataFrame(data=train_set['state'])
+y_test = pd.DataFrame(data=test_set['state'])
 
 
 #######################
@@ -50,3 +50,16 @@ for ctr in data['country']:
         index += 1
 
 # ===== Update data values =====
+# Main category
+X_train['main_category'].replace(main_category, inplace=True)
+X_test['main_category'].replace(main_category, inplace=True)
+# Sub category
+X_train['category'].replace(sub_category, inplace=True)
+X_test['category'].replace(sub_category, inplace=True)
+# Currency
+X_train['currency'].replace(currency, inplace=True)
+X_test['currency'].replace(currency, inplace=True)
+# Country
+X_train['country'].replace(country, inplace=True)
+X_test['country'].replace(country, inplace=True)
+
