@@ -1,11 +1,14 @@
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
+
 
 #############
 # Load data #
 #############
 # ===== Load csv file =====
-length_training_set = 1000
+length_training_set = 250000
 data = pd.read_csv(filepath_or_buffer='ks-projects-201801.csv', delimiter=',', header=0)
+data = data.dropna()    # Drop all rows that has NaN values
 train_set = data.head(length_training_set)
 test_set = data.tail(data.__len__() - length_training_set)
 
@@ -75,3 +78,9 @@ X_test['duration'] = (X_test['deadline']-X_test['launched']).astype('timedelta64
 # Delete 'launched' and 'deadline' columns
 X_train.drop(columns=['deadline', 'launched'], inplace=True)
 X_test.drop(columns=['deadline', 'launched'], inplace=True)
+
+# nan_rows = X_train[X_train['usd pledged'].isnull()]
+# print(nan_rows)
+# print(X_train.loc[[169]].values)
+# print(X_train.isnull().values.any())
+
