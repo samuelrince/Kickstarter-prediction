@@ -51,6 +51,14 @@ for ctr in data['country']:
     if ctr not in country:
         country[ctr] = index
         index += 1
+# Labels
+labels = dict()
+for label in data['state']:
+    if label not in country:
+        if label == 'successful':
+            labels[label] = 1
+        else:
+            labels[label] = 0
 
 # ===== Update data values =====
 # Main category
@@ -79,8 +87,6 @@ X_test['duration'] = (X_test['deadline']-X_test['launched']).astype('timedelta64
 X_train.drop(columns=['deadline', 'launched'], inplace=True)
 X_test.drop(columns=['deadline', 'launched'], inplace=True)
 
-# nan_rows = X_train[X_train['usd pledged'].isnull()]
-# print(nan_rows)
-# print(X_train.loc[[169]].values)
-# print(X_train.isnull().values.any())
-
+# ===== Labels =====
+y_train['state'].replace(labels, inplace=True)
+y_test['state'].replace(labels, inplace=True)
