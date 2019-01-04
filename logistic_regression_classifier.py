@@ -39,7 +39,7 @@ def logistic_regression_classifier(X, Y):
         S = np.dot(linalg.inv(Sw), Sb)
         eigval, eigvec = linalg.eig(S)
     except: #Singular Matrix
-        print("Singular matrix")
+        # print("Singular matrix")
         eigval, eigvec = linalg.eig(Sb, Sw+Sb)
 
     idx = eigval.argsort()[::-1] # Sort eigenvalues
