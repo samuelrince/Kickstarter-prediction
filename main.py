@@ -108,12 +108,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
 
 
 #######################
-# Logistic regression #
+# Logistic Regression #
 #######################
 ss = StandardScaler()
 lr = LogisticRegression()
 lr_pipe = Pipeline([('sscale', ss), ('logreg', lr)])
-lr_pipe.fit(X_train, y_train)
+lr_pipe.fit(X_train, y_train.values.ravel())
 print('lr acc:', lr_pipe.score(X_test, y_test))
 
 
@@ -126,9 +126,9 @@ y_predict = rf.predict(X_test)
 print('rf acc:', accuracy_score(y_test, y_predict))
 
 
-#################
-# Decision Tree #
-#################
+############################
+# Decision Tree Classifier #
+############################
 dtc = DecisionTreeClassifier(max_depth=None, max_features='auto')
 dtc.fit(X_train, y_train)
 print('dtc acc:', dtc.score(X_test, y_test))
