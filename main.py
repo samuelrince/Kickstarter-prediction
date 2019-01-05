@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, ExtraTreeClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
 
 
 #############
@@ -91,43 +92,50 @@ y['state'].replace(labels, inplace=True)
 ####################
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
 
-#######################
-# Logistic regression #
-#######################
-# W, projected_centroid, X_lda = logistic_regression_classifier(X_train.values, y_train.values)
-# predictedLabels_LDA = predict(X_test.values, projected_centroid, W)
-# total_correct = 0
-# total_incorrect = 0
-# for i in range(len(predictedLabels_LDA)):
-#     if predictedLabels_LDA[i] == y_test.values[i][0]:
-#         total_correct += 1
-#     else:
-#         total_incorrect += 1
-# print('Accuracy logistic regression :', total_correct / (total_correct + total_incorrect))
-
 
 #######################
 # Logistic Regression #
 #######################
+"""
 ss = StandardScaler()
 lr = LogisticRegression()
 lr_pipe = Pipeline([('sscale', ss), ('logreg', lr)])
 lr_pipe.fit(X_train, y_train.values.ravel())
 print('lr acc:', lr_pipe.score(X_test, y_test))
+"""
+# Accuracy: 0.644578
 
 
 ############################
 # Decision Tree Classifier #
 ############################
+"""
 dtc = DecisionTreeClassifier(max_depth=None, max_features='auto')
 dtc.fit(X_train, y_train)
 print('dtc acc:', dtc.score(X_test, y_test))
+"""
+# Accuracy: 0.650787
 
 
 #################
 # Random Forest #
 #################
+"""
 rf = RandomForestClassifier(n_estimators=1000, max_depth=None, max_features='auto')
 rf.fit(X_train, y_train.values.ravel())
 y_predict = rf.predict(X_test)
 print('rf acc:', accuracy_score(y_test, y_predict))
+"""
+# Accuracy: 0.668175
+
+
+#######
+# kNN #
+#######
+'''
+neigh = KNeighborsClassifier(n_neighbors=3)
+neigh.fit(X_train, y_train.values.ravel())
+y_predict = neigh.predict(X_test)
+print('kNN acc:', accuracy_score(y_test, y_predict))
+'''
+# Accuracy: 0.634514
