@@ -95,53 +95,53 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
 #######################
 # Logistic Regression #
 #######################
-"""
+
 ss = StandardScaler()
 lr = LogisticRegression()
 lr_pipe = Pipeline([('sscale', ss), ('logreg', lr)])
 lr_pipe.fit(X_train, y_train.values.ravel())
-print('lr acc:', lr_pipe.score(X_test, y_test))
-"""
-# Accuracy: 0.644578
+print('Logistic Regression acc:', lr_pipe.score(X_test, y_test))
+
+# LR Accuracy: 0.644578
 
 
 ############################
 # Decision Tree Classifier #
 ############################
-'''
+
 dtc = DecisionTreeClassifier(max_depth=None, max_features='auto')
 dtc.fit(X_train, y_train)
-print('dtc acc:', dtc.score(X_test, y_test))
-'''
-# Accuracy: 0.650787
+print('Decision Tree Classifier acc:', dtc.score(X_test, y_test))
+
+# DTC Accuracy: 0.650787
 
 
 #################
 # Random Forest #
 #################
-'''
-rf = RandomForestClassifier(n_estimators=100, max_depth=None, max_features='auto')
+
+rf = RandomForestClassifier(n_estimators=1000, max_depth=None, max_features='auto')
 rf.fit(X_train, y_train.values.ravel())
 y_predict = rf.predict(X_test)
-print('rf acc:', accuracy_score(y_test, y_predict))
-'''
-# Accuracy: 0.665790 (n_estimators=50)
-# Accuracy: 0.667383 (n_estimators=100)
-# Accuracy: 0.667569 (n_estimators=200)
-# Accuracy: 0.668175 (n_estimators=1000)
+print('Random Forest acc:', accuracy_score(y_test, y_predict))
+
+# RF Accuracy: 0.665790 (n_estimators=50)
+# RF Accuracy: 0.667383 (n_estimators=100)
+# RF Accuracy: 0.667569 (n_estimators=200)
+# RF Accuracy: 0.668175 (n_estimators=1000)
 
 
 #######
 # kNN #
 #######
-'''
+
 neigh = KNeighborsClassifier(n_neighbors=50)
 neigh.fit(X_train, y_train.values.ravel())
 y_predict = neigh.predict(X_test)
 print('kNN acc:', accuracy_score(y_test, y_predict))
-'''
-# Accuracy: 0.634514 (n_neighbors=3)
-# Accuracy: 0.664384 (n_neighbors=10)
-# Accuracy: 0.664893 (n_neighbors=20)
-# Accuracy: 0.669226 (n_neighbors=50)
-# Accuracy: 0.660956 (n_neighbors=200)
+
+# kNN Accuracy: 0.634514 (n_neighbors=3)
+# kNN Accuracy: 0.664384 (n_neighbors=10)
+# kNN Accuracy: 0.664893 (n_neighbors=20)
+# kNN Accuracy: 0.669226 (n_neighbors=50)
+# kNN Accuracy: 0.660956 (n_neighbors=200)
