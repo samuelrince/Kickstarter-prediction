@@ -81,7 +81,7 @@ X['launched'] = pd.to_datetime(X['launched'], format='%Y-%m-%d %H:%M:%S')
 # Adding duration time to the data in days
 X['duration'] = (X['deadline']-X['launched']).astype('timedelta64[D]')
 # Delete 'launched' and 'deadline' columns
-X.drop(columns=['deadline', 'launched'], inplace=True)
+X.drop(labels=['deadline', 'launched'], inplace=True)
 
 # ===== Labels =====
 y['state'].replace(labels, inplace=True)
