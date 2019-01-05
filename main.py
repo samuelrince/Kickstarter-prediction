@@ -20,8 +20,7 @@ data = data.dropna()    # Drop all rows that has NaN values
 
 # ===== Data generation =====
 # Feature selection
-features = ['category', 'main_category', 'currency', 'deadline', 'launched', 'country',
-            'usd pledged', 'usd_goal_real']
+features = ['category', 'main_category', 'currency', 'deadline', 'launched', 'country', 'usd_goal_real']
 X = pd.DataFrame(data=data[features])
 # Labels
 y = pd.DataFrame(data=data['state'])
@@ -117,6 +116,14 @@ lr_pipe.fit(X_train, y_train.values.ravel())
 print('lr acc:', lr_pipe.score(X_test, y_test))
 
 
+############################
+# Decision Tree Classifier #
+############################
+dtc = DecisionTreeClassifier(max_depth=None, max_features='auto')
+dtc.fit(X_train, y_train)
+print('dtc acc:', dtc.score(X_test, y_test))
+
+
 #################
 # Random Forest #
 #################
@@ -124,11 +131,3 @@ rf = RandomForestClassifier(n_estimators=1000, max_depth=None, max_features='aut
 rf.fit(X_train, y_train.values.ravel())
 y_predict = rf.predict(X_test)
 print('rf acc:', accuracy_score(y_test, y_predict))
-
-
-############################
-# Decision Tree Classifier #
-############################
-dtc = DecisionTreeClassifier(max_depth=None, max_features='auto')
-dtc.fit(X_train, y_train)
-print('dtc acc:', dtc.score(X_test, y_test))
